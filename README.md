@@ -2,10 +2,10 @@
 
 Provide a Borrowed-Or-oWned smart pointer.
 
-Alternative to [`Cow`] for which the [`Clone`] trait is not required for
+Alternative to `Cow` for which the `Clone` trait is not required for
 the encapsulated type.
 
-Use this crate if you want something like [`Cow`] but your type cannot be
+Use this crate if you want something like `Cow` but your type cannot be
 cloned.
 
 You can find the rustdoc [here](http://boussejra.com/rust-docs/boow/boow).
