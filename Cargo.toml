@@ -1,6 +1,6 @@
 [package]
 name = "boow"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Malik Olivier Boussejra <malik@boussejra.com>"]
 description = "`Borrow Or oWned` smart pointer. Alternative to Cow."
 license = "MIT"
