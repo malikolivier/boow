@@ -8,7 +8,7 @@ the encapsulated type.
 Use this crate if you want something like `Cow` but your type cannot be
 cloned.
 
-You can find the rustdoc [here](http://boussejra.com/rust-docs/boow/boow).
+You can find the rustdoc [here](http://boussejra.com/rust-doc/boow/boow).
 
 # How to use
 
