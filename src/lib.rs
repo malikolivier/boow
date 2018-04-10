@@ -1,9 +1,57 @@
+//! # Borrowed-Or-oWned
+//!
+//! Provide a Borrowed-Or-oWned smart pointer.
+//!
+//! Alternative to [`Cow`] for which the [`Clone`] trait is not required for
+//! the encapsulated type.
+//!
+//! Use this crate if you want something like [`Cow`] but your type cannot be
+//! cloned.
+//!
+//! # How to use
+//!
+//! ```rust
+//! extern crate boow;
+//! use boow::Bow;
+//!
+//! // This struct contains a type for which we cannot know at compile time
+//! // whether it will be owned or borrowed.
+//! struct MyStruct<'a> {
+//!     borrowed_or_owned: Bow<'a, InnerStruct>,
+//! }
+//!
+//! struct InnerStruct {
+//!     _stuff: String,
+//! }
+//!
+//! impl<'a> MyStruct<'a> {
+//!     // Use borrowed value
+//!     fn from_borrowed(inner: &'a InnerStruct) -> Self {
+//!         Self { borrowed_or_owned: Bow::Borrowed(inner) }
+//!     }
+//!
+//!     // Use owned value
+//!     fn from_owned(inner: InnerStruct) -> Self {
+//!         Self { borrowed_or_owned: Bow::Owned(inner) }
+//!     }
+//! }
+//! ```
+//!
+//! [`Cow`]: https://doc.rust-lang.org/std/borrow/enum.Cow.html
 use std::borrow::Borrow;
 use std::cmp::Ordering;
 use std::fmt;
 use std::hash::{Hash, Hasher};
 use std::ops::Deref;
 
+/// Borrow-Or-oWned smart pointer.
+///
+/// [`Bow`] implements [`Deref`], which means that you can call non-mutating
+/// methods directly on the data it encloses. If mutation is desired,
+/// [`borrow_mut`] will obtain some mutable reference to an owned value, but
+/// only if it is owned.
+///
+/// [`borrow_mut`]: Bow::borrow_mut
 #[derive(Copy, Clone)]
 pub enum Bow<'a, T: 'a> {
     Owned(T),
@@ -27,6 +75,8 @@ impl<'a, T: 'a> Deref for Bow<'a, T> {
 }
 
 impl<'a, T: 'a> Bow<'a, T> {
+    /// Get a mutable reference to the enclosed value. Return [`None`] if the
+    /// value is not owned.
     pub fn borrow_mut(&mut self) -> Option<&mut T> {
         match self {
             &mut Bow::Owned(ref mut t) => Some(t),
@@ -34,6 +84,7 @@ impl<'a, T: 'a> Bow<'a, T> {
         }
     }
 
+    /// Consume the enclosed value and return it if it is owned.
     pub fn extract(self) -> Option<T> {
         match self {
             Bow::Owned(t) => Some(t),

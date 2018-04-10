@@ -2,7 +2,12 @@
 name = "boow"
 version = "0.1.0"
 authors = ["Malik Olivier Boussejra <malik@boussejra.com>"]
-description = "Provided BOOW `Borrow Or OWned` smart pointer"
+description = "`Borrow Or oWned` smart pointer. Alternative to Cow."
 license = "MIT"
+readme = "README.md"
+keywords = ["bow", "borrow", "owned", "pointer", "cow"]
+categories = ["no-std", "rust-patterns", "memory-management"]
+documentation = "http://boussejra.com/rust-docs/boow/boow"
+repository = "https://github.com/malikolivier/boow"
 
 [dependencies]
