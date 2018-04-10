@@ -34,3 +34,13 @@ impl<'a> MyStruct<'a> {
     }
 }
 ```
+
+# `no_std`
+
+If you're interested in using this crate with `no_std` and the `alloc` crate,
+add the following to `Cargo.toml`:
+
+```toml
+[dependencies]
+boow = { version = "0.1", default-features = false }
+```
