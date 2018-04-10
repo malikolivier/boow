@@ -1,8 +1,8 @@
 [package]
-name = "bow"
+name = "boow"
 version = "0.1.0"
 authors = ["Malik Olivier Boussejra <malik@boussejra.com>"]
-description = "Provided BOW `Borrow Or oWned` smart pointer"
+description = "Provided BOOW `Borrow Or OWned` smart pointer"
 license = "MIT"
 
 [dependencies]
