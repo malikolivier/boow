@@ -11,3 +11,8 @@ documentation = "http://boussejra.com/rust-doc/boow/boow"
 repository = "https://github.com/malikolivier/boow"
 
 [dependencies]
+cfg-if = "0.1"
+
+[features]
+default = ["std"]
+std = []

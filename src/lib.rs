@@ -38,11 +38,28 @@
 //! ```
 //!
 //! [`Cow`]: https://doc.rust-lang.org/std/borrow/enum.Cow.html
-use std::borrow::Borrow;
-use std::cmp::Ordering;
-use std::fmt;
-use std::hash::{Hash, Hasher};
-use std::ops::Deref;
+#![cfg_attr(not(feature = "std"), no_std)]
+#![cfg_attr(not(feature = "std"), feature(alloc))]
+
+#[macro_use]
+extern crate cfg_if;
+
+cfg_if! {
+    if #[cfg(feature = "std")] {
+        use std::borrow::Borrow;
+        use std::cmp::Ordering;
+        use std::fmt;
+        use std::hash::{Hash, Hasher};
+        use std::ops::Deref;
+    } else {
+        extern crate alloc;
+        use alloc::borrow::Borrow;
+        use core::cmp::Ordering;
+        use core::fmt;
+        use core::hash::{Hash, Hasher};
+        use core::ops::Deref;
+    }
+}
 
 /// Borrow-Or-oWned smart pointer.
 ///
