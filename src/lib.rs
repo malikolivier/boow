@@ -110,11 +110,7 @@ impl<'a, T: 'a> Bow<'a, T> {
     }
 }
 
-impl<'a, T: 'a> Eq for Bow<'a, T>
-where
-    T: Eq,
-{
-}
+impl<'a, T: 'a> Eq for Bow<'a, T> where T: Eq {}
 
 impl<'a, T: 'a> Ord for Bow<'a, T>
 where
