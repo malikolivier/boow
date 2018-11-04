@@ -77,9 +77,9 @@ pub enum Bow<'a, T: 'a> {
 
 impl<'a, T: 'a> Borrow<T> for Bow<'a, T> {
     fn borrow(&self) -> &T {
-        match self {
-            &Bow::Owned(ref t) => t,
-            &Bow::Borrowed(t) => t,
+        match *self {
+            Bow::Owned(ref t) => t,
+            Bow::Borrowed(t) => t,
         }
     }
 }
@@ -95,9 +95,9 @@ impl<'a, T: 'a> Bow<'a, T> {
     /// Get a mutable reference to the enclosed value. Return [`None`] if the
     /// value is not owned.
     pub fn borrow_mut(&mut self) -> Option<&mut T> {
-        match self {
-            &mut Bow::Owned(ref mut t) => Some(t),
-            &mut Bow::Borrowed(_) => None,
+        match *self {
+            Bow::Owned(ref mut t) => Some(t),
+            Bow::Borrowed(_) => None,
         }
     }
 
